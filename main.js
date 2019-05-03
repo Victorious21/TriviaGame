@@ -47,7 +47,7 @@ var game = {
         panel.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
         for (var i = 0; i < questions[this.currentQuestion].answers.length; i++)
         {
-            panel.append(" <button class='answer-button' id= 'button' data-name=' " + 
+            panel.append("<button class='answer-button' id= 'button' data-name='" + 
            questions[this.currentQuestion].answers[i] + ">'" +
            questions[this.currentQuestion].answers[i] + "</button>" );
         }
@@ -129,10 +129,10 @@ var game = {
     },
 
     answeredCorrectly: function() {
-
-        game.correct++;
-
+       
         clearInterval(timer);
+        
+        game.correct++;
 
         panel.html("<h2>CORRECT YOUR SMART!!!!</h2>");
         panel.append("<img src= '" + questions[game.currentQuestion].image + "'/>");
@@ -158,3 +158,19 @@ var game = {
     }
 
 };
+
+
+// CLICK EVENTS
+//--------------------------------------------------------------------------------------------
+$(document).on("click", "#start-over", function() {
+    game.reset();
+});
+
+$(document).on("click", ".answer-button", function(e){
+game.clicked(e);
+});
+
+$(document).on("click", "#start", function(){
+    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id= 'counter-number'>30 </span> Seconds</h2>");
+    game.loadQuestion();
+});
